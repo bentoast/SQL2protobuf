@@ -1,12 +1,13 @@
 SELECT
   'syntax = "proto3";' + CHAR(13) + CHAR(10) + CHAR(13) + CHAR(10) +
   'import "google/protobuf/timestamp.proto";' + CHAR(13) + CHAR(10) +
-  'import "Protos/decimal.proto";' + CHAR(13) + CHAR(10) + CHAR(13) + CHAR(10) +
-  '//  rpc Get' + a.name + ' (' + a.name + 'Request) returns (' + a.name + 'Response);' + CHAR(13) + CHAR(10) +
-  '//  rpc Query' + a.name + ' (' + a.name + 'Query) returns (' + a.name + 'Response);' + CHAR(13) + CHAR(10) +
-  '//  rpc Create' + a.name + ' (' + a.name + ') returns (OperationStatus);' + CHAR(13) + CHAR(10) +
+  'import "Protos/decimal.proto";' + CHAR(13) + CHAR(10) +
+  'import "Protos/operationstatus.proto";' + CHAR(13) + CHAR(10) +  CHAR(13) + CHAR(10) +
+  '//  rpc Get' + a.name + ' (SingleRequest) returns (' + a.name + 'Response);' + CHAR(13) + CHAR(10) +
+  '//  rpc Query' + a.name + ' (QueryRequest) returns (' + a.name + 'Response);' + CHAR(13) + CHAR(10) +
+  '//  rpc Create' + a.name + ' (' + a.name + ') returns (CreateResponse);' + CHAR(13) + CHAR(10) +
   '//  rpc Update' + a.name + ' (' + a.name + ') returns (OperationStatus);' + CHAR(13) + CHAR(10) +
-  '//  rpc Delete' + a.name + ' (' + a.name + 'Request) returns (OperationStatus);' + CHAR(13) + CHAR(10) + CHAR(13) + CHAR(10) +
+  '//  rpc Delete' + a.name + ' (DeleteRequest) returns (OperationStatus);' + CHAR(13) + CHAR(10) + CHAR(13) + CHAR(10) +
   'message ' + a.name + 'Request {' + CHAR(13) + CHAR(10) +
   '  string id = 1;' + CHAR(13) + CHAR(10) +
   '  repeated string attribute = 2;' + CHAR(13) + CHAR(10) +
@@ -47,4 +48,4 @@ SELECT
   .value('.', 'NVARCHAR(MAX)'), 1, 1, '') + '}'
 FROM sys.all_objects a
 WHERE
-  a.name LIKE 'TABLE NAME'
+  a.name LIKE 'systemuser'
