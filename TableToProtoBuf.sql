@@ -8,21 +8,12 @@ SELECT
   '//  rpc Create' + a.name + ' (' + a.name + ') returns (CreateResponse);' + CHAR(13) + CHAR(10) +
   '//  rpc Update' + a.name + ' (' + a.name + ') returns (OperationStatus);' + CHAR(13) + CHAR(10) +
   '//  rpc Delete' + a.name + ' (DeleteRequest) returns (OperationStatus);' + CHAR(13) + CHAR(10) + CHAR(13) + CHAR(10) +
-  'message ' + a.name + 'Request {' + CHAR(13) + CHAR(10) +
-  '  string id = 1;' + CHAR(13) + CHAR(10) +
-  '  repeated string attribute = 2;' + CHAR(13) + CHAR(10) +
-  '}' + CHAR(13) + CHAR(10) + CHAR(13) + CHAR(10) +
-  'message ' + a.name + 'Query {' + CHAR(13) + CHAR(10) +
-  '  string query = 1;' + CHAR(13) + CHAR(10) +
-  '  repeated string attribute = 2;' + CHAR(13) + CHAR(10) +
-  '  int32 page_number = 3;' + CHAR(13) + CHAR(10) +
-  '  int32 results_per_page = 4;' + CHAR(13) + CHAR(10) +
-  '}' + CHAR(13) + CHAR(10) + CHAR(13) + CHAR(10) +
   'message ' + a.name + 'Response {' + CHAR(13) + CHAR(10) +
-  '  repeated ' + a.name + ' results = 1;' + CHAR(13) + CHAR(10) +
-  '  int32 page_number = 2;' + CHAR(13) + CHAR(10) +
-  '  int32 results_per_page = 3;' + CHAR(13) + CHAR(10) +
-  '  int32 total_number_results = 4;' + CHAR(13) + CHAR(10) +
+  '  int32 page_number = 1;' + CHAR(13) + CHAR(10) +
+  '  int32 results_per_page = 2;' + CHAR(13) + CHAR(10) +
+  '  int32 total_number_results = 3;' + CHAR(13) + CHAR(10) +
+  '  OperationStatus status = 4;' + CHAR(13) + CHAR(10) +
+  '  repeated ' + a.name + ' results = 5;' + CHAR(13) + CHAR(10) +
   '}' + CHAR(13) + CHAR(10) + CHAR(13) + CHAR(10) +
   'message ' + a.name + ' {' + CHAR(13) + CHAR(10) + ' ' +
   STUFF((
@@ -48,4 +39,4 @@ SELECT
   .value('.', 'NVARCHAR(MAX)'), 1, 1, '') + '}'
 FROM sys.all_objects a
 WHERE
-  a.name LIKE 'systemuser'
+  a.name LIKE 'scout_player'
