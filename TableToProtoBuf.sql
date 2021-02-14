@@ -1,13 +1,20 @@
 SELECT
   'syntax = "proto3";' + CHAR(13) + CHAR(10) + CHAR(13) + CHAR(10) +
+  'option csharp_namespace = "Audible_Library";' + CHAR(13) + CHAR(10) + CHAR(13) + CHAR(10) +
   'import "google/protobuf/timestamp.proto";' + CHAR(13) + CHAR(10) +
   'import "Protos/decimal.proto";' + CHAR(13) + CHAR(10) +
   'import "Protos/operationstatus.proto";' + CHAR(13) + CHAR(10) +  CHAR(13) + CHAR(10) +
+  'package audible;' + CHAR(13) + CHAR(10) + CHAR(13) + CHAR(10) +
+  '//  Copy these into the main service message' + CHAR(13) + CHAR(10) +
   '//  rpc Get' + a.name + ' (SingleRequest) returns (' + a.name + 'Response);' + CHAR(13) + CHAR(10) +
   '//  rpc Query' + a.name + ' (QueryRequest) returns (' + a.name + 'Response);' + CHAR(13) + CHAR(10) +
   '//  rpc Create' + a.name + ' (' + a.name + ') returns (CreateResponse);' + CHAR(13) + CHAR(10) +
-  '//  rpc Update' + a.name + ' (' + a.name + ') returns (OperationStatus);' + CHAR(13) + CHAR(10) +
+  '//  rpc Update' + a.name + ' (' + a.name + ' Update) returns (OperationStatus);' + CHAR(13) + CHAR(10) +
   '//  rpc Delete' + a.name + ' (DeleteRequest) returns (OperationStatus);' + CHAR(13) + CHAR(10) + CHAR(13) + CHAR(10) +
+  'message ' + a.name + 'Update {' + CHAR(13) + CHAR(10) +
+  '  repated int32 attributes = 1;' + CHAR(13) + CHAR(10) +
+  '  ' + a.name + ' item = 2;' + CHAR(13) + CHAR(10) +
+  '}' + CHAR(13) + CHAR(10) + CHAR(13) + CHAR(10) +
   'message ' + a.name + 'Response {' + CHAR(13) + CHAR(10) +
   '  int32 page_number = 1;' + CHAR(13) + CHAR(10) +
   '  int32 results_per_page = 2;' + CHAR(13) + CHAR(10) +
@@ -39,4 +46,4 @@ SELECT
   .value('.', 'NVARCHAR(MAX)'), 1, 1, '') + '}'
 FROM sys.all_objects a
 WHERE
-  a.name LIKE 'scout_player'
+  a.name LIKE 'TABLE NAME'
